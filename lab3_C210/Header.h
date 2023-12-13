@@ -29,17 +29,7 @@ std::ostream& operator<<(std::ostream& os, const std::vector<T>& vv) {
 	return os;
 }
 
-//std::ostream& operator<<(std::ostream& os, const std::vector<std::vector<int>>& vv) {
-//	for (size_t i = 0; i < vv.size(); i++)
-//	{
-//		for (size_t j = 0; j < vv[i].size(); j++)
-//		{
-//			os << vv[i][j]<<" ";
-//		}
-//		std::cout << std::endl;
-//	}
-//	return os;
-//}
+
 bool InsertElementChar(std::vector<char>& v, const char ch) {
 	
 	bool flag = true;
