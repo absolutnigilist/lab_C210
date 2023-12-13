@@ -48,33 +48,41 @@ bool InsertElementChar(std::vector<char>& v, const char ch) {
 	return flag;
 }
 void InsertElementW(std::vector<char>& v) {
-	std::vector<char>::iterator it = v.begin();
-	while (it!=v.end())
+	if (!v.empty())
 	{
-		it++;
-		it = v.insert(it, 'W');
-		++it;
+		std::vector<char>::iterator it = v.begin();
+		while (it != v.end())
+		{
+			it++;
+			it = v.insert(it, 'W');
+			++it;
+		}
 	}
+	
 }
 void EraseRepeat(std::vector<char>& v) {
 	std::vector<char>::iterator it = v.begin();
-
-	while (it!=v.end()&&(it+1)!=v.end())
+	while (it!=v.end())
 	{
-		if (*it==*(it+1))
+		std::vector<char>::iterator runner = it + 1;
+		while (runner!=v.end())
 		{
-			it=v.erase(it);
+			if (*runner==*it)
+			{
+				runner = v.erase(runner);
+			}
+			else
+			{
+				++runner;
+			}
 		}
-		else
-		{
-			++it;
-		}
-		
+		++it;
 	}
+
 }
 void RemoveDuplicateSequences(std::vector<char>& v) {
 	std::vector<char>::iterator it = v.begin();
-	int count=0;
+	int count=1;
 
 	while (it != v.end() && (it+1) != v.end())
 	{
