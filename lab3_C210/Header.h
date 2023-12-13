@@ -102,3 +102,48 @@ void RemoveDuplicateSequences(std::vector<char>& v) {
 	}
 
 }
+template<typename T>
+void PrintContainer(const T& a) {
+	std::cout << "Container type: " << typeid(a).name() << std::endl;
+	if (a.empty())
+	{
+		std::cout << "Container is empty"<<std::endl;
+	}
+	else
+	{
+		typename T::const_iterator it = a.begin();
+		while (it != a.end())
+		{
+			std::cout << *it << " ";
+			std::cout << std::endl;
+			++it;
+		}
+	}
+}
+bool isAnyCoordinateNegative(const Point& other){
+	return (other.m_x < 0 || other.m_y < 0);
+}
+
+template <typename T>
+void Erase_A_a(T& a) {
+	if (a.empty())
+	{
+		std::cout << "Container is empty" << std::endl;
+	}
+	else
+	{
+		typename T::iterator it = a.begin();
+		while (it != a.end())
+		{
+			if (it->operator[](0)=='A'||it->operator[](0)=='a')
+			{
+				it = a.erase(it);
+			}
+			else
+			{
+				++it;
+			}
+			
+		}
+	}
+}

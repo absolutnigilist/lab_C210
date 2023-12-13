@@ -10,6 +10,9 @@ public:
 	~Point();
 	int Get_m_x() const;
 	int Get_m_y()const;
+	bool operator<(const Point& other)const;
+	bool operator==(const Point& other) const;
+	friend bool isAnyCoordinateNegative(const Point& other);
 	friend std::ostream& operator<<(std::ostream& os, const Point& other) {
 		os << "m_x: " << other.m_x << " " << "m_y: " << other.m_y << std::endl;
 		return os;

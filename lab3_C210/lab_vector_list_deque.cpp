@@ -2,11 +2,11 @@
 	//Контейнеры стандартной библиотеки - vector
 	//Итераторы
 
-//#include <iostream>
-//#include <vector>
 #include "Header.h"
 #include "MyString.h"
 #include "Point.h"
+#include <list>
+#include <deque>
 
 
 #pragma warning(disable: 4786)
@@ -271,7 +271,7 @@ int main()
 	std::cout << sep << std::endl;
 	stop
 
-		///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 	//Вставка элемента последовательности insert().
 	//Реализуйте функцию, которая должна вставлять новый элемент
@@ -293,7 +293,7 @@ int main()
 	
 	InsertElementW(vChar2);
 
-///////////////////////////////////////////////////////////////////
+	///////////////////////////////////////////////////////////////////
 	//Напишите функцию, которая должна удалять только повторяющиеся последовательности.
 	//Например: было - "qwerrrrty12222r3", стало - "qwety1r3"
 
@@ -302,7 +302,7 @@ int main()
 
 	stop
 
-///////////////////////////////////////////////////////////////////
+	///////////////////////////////////////////////////////////////////
 
 	//Удаление элемента последовательности erase()
 	//Напишите функцию удаления из любого вектора всех дублей 
@@ -313,7 +313,7 @@ int main()
 
 	stop
 
-///////////////////////////////////////////////////////////////////
+	///////////////////////////////////////////////////////////////////
 	//Создайте новый вектор таким образом, чтобы его элементы стали
 	//копиями элементов любого из созданных ранее векторов, но расположены
 	//были бы в обратном порядке
@@ -321,66 +321,114 @@ int main()
 	vector<char>revercsed_vChar4(vChar4.rbegin(), vChar4.rend());
 	stop
 
-///////////////////////////////////////////////////////////////////
+	///////////////////////////////////////////////////////////////////
 
 	//Задание 1. Списки. Операции, характерные для списков.
 	//Создайте пустой список из элементов Point - ptList1 и наполните
 	//его значениями с помощью методов push_back(),
 	//push_front, insert()
 	
+	std::list<Point> ptList1;
+	ptList1.push_back(Point(3, 3));
+	ptList1.push_front(Point(2, 2));
+	ptList1.insert(ptList1.begin(), Point(1, 1));
 
+	stop
 	//Напишите шаблон функции, которая будет выводить элементы
 	//ЛЮБОГО КОНТЕЙНЕРА на печать. Проверьте работу шаблона на контейнерах
 	//vector и list. Подсказка - хотелось бы увидеть тип контейнера.
+	
+	PrintContainer(ptList1);
+	std::cout << sep << std::endl;
 
-
+	stop
 	//Сделайте любой из списков "реверсивным" - reverse()
 
+	ptList1.reverse();
+	
+	PrintContainer(ptList1);
+	std::cout << sep << std::endl;
+	
+	stop
 
 	//Создайте список ptList2 из элементов Point таким образом, чтобы он стал 
 	//копией вектора элементов типа Point, но значения элементов списка располагались
 	//бы в обратном порядке 
-
-
+	
+	vector<Point> original_vector1 = {Point(1,1), Point(2,2), Point(3,3)};
+	list<Point> ptList2(original_vector1.rbegin(),original_vector1.rend());
+	
+	PrintContainer(ptList2);
+	std::cout << sep << std::endl;
 
 	//Отсортируйте списки  ptList1 и ptList2 - методом класса list - sort()
 	//по возрастанию.
 	//Подумайте: что должно быть перегружено в классе Point для того, чтобы
 	//работала сортировка
 
-
+	ptList1.sort();
+	ptList2.sort();
 	
-
-
+	PrintContainer(ptList1);
+	PrintContainer(ptList2);
+	std::cout << sep << std::endl;
 	stop
 
-	//Объедините отсортированные списки - merge(). Посмотрите: что
-	//при этом происходит с каждым списком.
+		//Объедините отсортированные списки - merge(). Посмотрите: что
+		//при этом происходит с каждым списком.
 
+	ptList1.merge(ptList2);											//содержимое ptList2 переносится в ptList1, список становится пустой
 	
+	PrintContainer(ptList1);
+	PrintContainer(ptList2);
+	std::cout << sep << std::endl;
 	stop
 
 	//Исключение элемента из списка - remove()
 	//Исключите из списка элемент с определенным значением.
 	//Подумайте: что должно быть перегружено в классе Point?
-	
 
+	ptList1.remove(Point(3, 3));
+	
+	stop
 	//Исключение элемента из списка, удовлетворяющего заданному условию:
 	//любая из координат отрицательна - remove_if(). 
+	
+	list<Point>ptList3 = { Point(1,1),Point(-1,-1) };
+	
+	PrintContainer(ptList3);
+	std::cout << sep << std::endl;
 
+	ptList3.remove_if(isAnyCoordinateNegative);
+	
+	PrintContainer(ptList3);
+	std::cout << sep << std::endl;
 
 	//Исключение из списка подряд расположенных дублей - unique(). 
+	
+	PrintContainer(ptList1);
+	std::cout << sep << std::endl;
+
+	ptList1.unique();
+	PrintContainer(ptList1);
+	std::cout << sep << std::endl;
 
 	stop
 
-///////////////////////////////////////////////////////////////////
+	///////////////////////////////////////////////////////////////////
 	//Задание 2.Очередь с двумя концами - контейнер deque
 
 	//Создайте пустой deque с элементами типа Point. С помощью
 	//assign заполните deque копиями элементов вектора. С помощью
 	//разработанного Вами в предыдущем задании универсального шаблона
 	//выведите значения элементов на печать
-
+	
+	vector<Point> original_vector2 = { Point(1,1), Point(2,2), Point(3,3) };
+	deque<Point> ptDeque;
+	ptDeque.assign(original_vector2.begin(),original_vector2.end());
+	
+	PrintContainer(ptDeque);
+	std::cout << sep << std::endl;
 
 
 	//Создайте deque с элементами типа MyString. Заполните его значениями
@@ -388,7 +436,16 @@ int main()
 	//С помощью erase удалите из deque все элементы, в которых строчки
 	//начинаются с 'A' или 'a'
 
+	deque<MyString>msDeque;
+	msDeque.push_back("Apple");
+	msDeque.push_front("Banana");
+	msDeque.insert(msDeque.begin(), "apricot");
 
+	Erase_A_a(msDeque);
+	PrintContainer(msDeque);
+	std::cout << sep << std::endl;
+
+stop
 
 
 	return 0;

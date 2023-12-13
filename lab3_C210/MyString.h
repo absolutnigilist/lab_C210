@@ -16,4 +16,6 @@ public:
 	MyString& operator=(const char* other_string);
 	friend std::ostream& operator<<(std::ostream& os, const MyString& other);
 	const char* GetString()const;
+	char& operator[](int index);
+	const char& operator[](int index)const;
 };

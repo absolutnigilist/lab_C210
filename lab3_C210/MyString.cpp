@@ -73,3 +73,23 @@ std::ostream& operator<<(std::ostream& os, const MyString& other) {
 const char* MyString::GetString()const {
 	return p_Name;
 }
+
+char& MyString::operator[](int index)
+{
+	if (index>=0&&index<=strlen(p_Name))
+	{
+		return p_Name[index];
+	}
+	else
+	{
+		throw std::out_of_range("Index out of range");
+	}
+}
+
+const char& MyString::operator[](int index) const
+{
+	if (index>=0&&index<strlen(p_Name))
+	{
+		return p_Name[index];
+	}
+}

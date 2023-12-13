@@ -14,3 +14,20 @@ int Point::Get_m_y() const
 	return m_y ;
 }
 
+bool Point::operator<(const Point& other)const
+{
+if (m_x < other.m_x&&m_y<other.m_y) 
+	{
+		return true; 
+	}
+	return false;
+}
+
+bool Point::operator==(const Point& other) const
+{
+	if (m_x==other.m_x&&m_y==other.m_y)
+	{
+		return true;
+	}
+	return false;
+}
