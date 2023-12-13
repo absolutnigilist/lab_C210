@@ -4,12 +4,13 @@ Circle::Circle() :Shape(RED) {};
 Circle::Circle(int x, int y, int radius, COLOR c) :Shape(c), m_x(x), m_y(y), m_radius(radius) {
 };
 Circle::~Circle() {};
-Shape& Circle::operator = (const Circle& other) {
+Shape& Circle::operator = (const Shape& other) {
 	if (this != &other)
 	{
-		m_x = other.m_x;
-		m_y = other.m_y;
-		m_radius = other.m_radius;
+		const Circle& r = dynamic_cast<const Circle&>(other);
+		m_x = r.m_x;
+		m_y = r.m_y;
+		m_radius = r.m_radius;
 		Shape::operator=(other);
 	}
 	return *this;

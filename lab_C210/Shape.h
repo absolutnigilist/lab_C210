@@ -2,7 +2,7 @@
 #include <iostream>
 #include <fstream>
 
-//enum COLOR{ RED, GREEN, BLUE, YELLOW, BLACK, WHITE }; //
+
 
 class Shape{
 public:

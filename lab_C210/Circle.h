@@ -10,7 +10,7 @@ public:
 	Circle();
 	Circle(int m_x, int m_y, int m_radius, COLOR c);
 	virtual ~Circle();
-	virtual Shape& operator = (const Circle & other);
+	virtual Shape& operator = (const Shape & other);
 	virtual bool operator==(const Shape& other)const override;
 	virtual double Scale()const override;
 	virtual COLOR GetColor()const override;

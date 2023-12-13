@@ -4,7 +4,7 @@
 #include "Circle.h"
 #include < sstream >
 #include <vector>
-//#include "test_list._lab1.cpp"
+
 
 List::List() :m_size(0) {
 	Head.pNext = &Tail;
@@ -58,9 +58,13 @@ List& List::operator=(const List& other) {
 
 		for (size_t i = 0; i < size; i++)
 		{
-			*pThis->m_data = *pOther->m_data;
-			delete pThis->m_data;
-			pThis->m_data = pOther->m_data->ShapeCopy();
+			try {
+				*pThis->m_data = *pOther->m_data;
+			}
+			catch (std::bad_cast&) {
+				delete pThis->m_data;
+				pThis->m_data = pOther->m_data->ShapeCopy();
+			}
 			pThis = pThis->pNext;
 			pOther = pOther->pNext;
 		}
@@ -166,10 +170,7 @@ std::istream& operator>>(std::istream& is, List& other) {
 		other.AddToHead(*tmp);
 	}
 		
-	//if (tmp)
-	{
-//		other.AddToHead(*tmp);
-	}
+	
 	return is;
 }
 

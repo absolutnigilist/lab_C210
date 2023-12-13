@@ -9,13 +9,15 @@ Rect::Rect(int left, int right, int top, int bottom, COLOR c):Shape (c){
 	RectNorm(left, right, top, bottom);
 }
 Rect::~Rect() {};
-Shape& Rect::operator=(const Rect& other) {
+Shape& Rect::operator=(const Shape& other) {
 	if (this!=&other)
 	{
-		m_left = other.m_left;
-		m_right = other.m_right;
-		m_top = other.m_top;
-		m_bottom = other.m_bottom;
+		const Rect& r = dynamic_cast<const Rect&>(other);
+		m_left = r.m_left;
+		m_left = r.m_left;
+		m_right = r.m_right;
+		m_top = r.m_top;
+		m_bottom = r.m_bottom;
 		Shape::operator=(other);
 	}
 	return*this;

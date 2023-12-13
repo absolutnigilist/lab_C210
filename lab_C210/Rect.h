@@ -11,7 +11,7 @@ public:
 	Rect();
 	Rect(int left, int right, int top, int bottom, COLOR c);
 	virtual ~Rect();
-	virtual Shape& operator=(const Rect& other);
+	virtual Shape& operator=(const Shape& other);
 	virtual bool operator==(const Shape& other) const override;
 	virtual double Scale()const override;
 	virtual COLOR GetColor()const override;

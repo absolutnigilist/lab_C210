@@ -18,17 +18,28 @@ void PrintVectorInfo(const std::vector <Point*>& a) {
 		std::cout << "m_x: " << a[i]->Get_m_x() << " " << "m_y: " << a[i]->Get_m_y() << std::endl;
 	}
 }
-std::ostream& operator<<(std::ostream& os, const std::vector<std::vector<int>>& vv) {
-	for (size_t i = 0; i < vv.size(); i++)
+template<typename T>
+std::ostream& operator<<(std::ostream& os, const std::vector<T>& vv) {
+	for (typename std::vector<T>::size_type i= 0; i < vv.size(); ++i)
 	{
-		for (size_t j = 0; j < vv[i].size(); j++)
-		{
-			os << vv[i][j]<<" ";
-		}
-		std::cout << std::endl;
+		os << vv[i] << " ";
 	}
+	std::cout << std::endl;
+	
 	return os;
 }
+
+//std::ostream& operator<<(std::ostream& os, const std::vector<std::vector<int>>& vv) {
+//	for (size_t i = 0; i < vv.size(); i++)
+//	{
+//		for (size_t j = 0; j < vv[i].size(); j++)
+//		{
+//			os << vv[i][j]<<" ";
+//		}
+//		std::cout << std::endl;
+//	}
+//	return os;
+//}
 bool InsertElementChar(std::vector<char>& v, const char ch) {
 	
 	bool flag = true;
@@ -82,13 +93,14 @@ void EraseRepeat(std::vector<char>& v) {
 }
 void RemoveDuplicateSequences(std::vector<char>& v) {
 	std::vector<char>::iterator it = v.begin();
-	int count=1;
+	
 
 	while (it != v.end() && (it+1) != v.end())
 	{
+		int count = 1;
 		if (*it == *(it+1))
 		{
-			while (*it == *(it+count))
+			while ((it+count)!=v.end()&&*it == *(it+count))
 			{
 				++count;
 			}

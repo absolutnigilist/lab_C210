@@ -53,7 +53,7 @@ int main()
 	//ѕодсказка: так как така€ проверка понадобитс€ ¬ам и в следующих задани€х,
 	//напишите шаблон функции, котора€ дл€ вектора, содержащего элементы любого типа
 	//выводит его "реквизиты" и значени€ элементов на консоль.
-	for (size_t i = 0; i < 5; i++)
+	for (size_t i = 0; i < 20; i++)
 	{
 		vInt.push_back(i);
 		PrintVectorInfo(vInt);
@@ -101,41 +101,45 @@ int main()
 	//вектор вещественных - vDouble3, который €вл€етс€ копией элементов
 	// [0,5) массива вещественных чисел dMas. ѕредварительно массив dMas 
 	//нужно создать и проинициализировать!
-#define DEBUG
+//#define DEBUG
 	
-#ifndef DEBUG
-	double dMas[] = { 1.5,2.5,3.5,4.5,5.5,6.5 };
-	int size = sizeof(dMas) / sizeof(dMas[0]);
-	vector<double> vDouble3(dMas, dMas + size / 2);
-
-	for (size_t i = 0; i < vDouble3.size(); i++)
+//#ifndef DEBUG
 	{
-		std::cout << vDouble3[i] << " ";
+		double dMas[] = { 1.5,2.5,3.5,4.5,5.5,6.5 };
+		int size = sizeof(dMas) / sizeof(dMas[0]);
+		vector<double> vDouble3(dMas, dMas + 5);
+
+		for (size_t i = 0; i < vDouble3.size(); i++)
+		{
+			std::cout << vDouble3[i] << " ";
+		}
+		std::cout << sep << std::endl;
 	}
-	std::cout << sep << std::endl;
-#endif // !DEBUG
+//#endif // !DEBUG
 
 	
-#ifdef DEBUG
-	double dMas[] = { 1.5,2.5,3.5,4.5,5.5,6.5 };
-	vector<double> vDouble3 = { dMas[0], dMas[5] };
-	for (size_t i = 0; i < vDouble3.size(); i++)
-	{
-		std::cout << vDouble3[i] << " ";
-	}
-	std::cout << std::endl;
-	std::cout << sep << std::endl;
-#endif //DEBUG
+//#ifdef DEBUG
+	
+		double dMas[] = { 1.5,2.5,3.5,4.5,5.5,6.5 };
+		vector<double> vDouble3 = { &dMas[0], &dMas[5] };
+		for (size_t i = 0; i < vDouble3.size(); i++)
+		{
+			std::cout << vDouble3[i] << " ";
+		}
+		std::cout << std::endl;
+		std::cout << sep << std::endl;
+	
+//#endif //DEBUG
 
 	
 	//вектор вещественных - vDouble4, который €вл€етс€ копией элементов
 	// [2,5) вектора vDouble3. 
-	vDouble3.resize(5);
-	vector<double> vDouble4 = { vDouble3[1], vDouble3[4] };
+	//vDouble3.resize(5);
+	vector<double> vDouble4 = { vDouble3.begin() + 2, vDouble3.begin() + 5 };
 	
 	for (size_t i = 0; i < vDouble4.size(); i++)
 	{
-		std::cout << vDouble3[i] << " ";
+		std::cout << vDouble4[i] << " ";
 	}
 	std::cout << std::endl;
 	std::cout << sep << std::endl;
@@ -198,7 +202,7 @@ int main()
 
 		
 		{
-		int n = 5;										
+		int n = 20;										
 		size_t m = 10;
 		vector<int> v(n);								//создаем вектор интов с размером 5 элементов
 		v.reserve(m);									//резервируем пам€ть под 10 элементов, фактический размер не мен€етс€
@@ -297,7 +301,7 @@ int main()
 	//Ќапишите функцию, котора€ должна удал€ть только повтор€ющиес€ последовательности.
 	//Ќапример: было - "qwerrrrty12222r3", стало - "qwety1r3"
 
-	vector<char> vChar3 = { 'q','w','e','r','r','r','r','t','y','1','2','2','2','2','r','3' };
+	vector<char> vChar3 = { 'q','q','w','e','r','r','r','r','t','y','1','2','2','2','2','r','3','3'};
 	RemoveDuplicateSequences(vChar3);										
 
 	stop
