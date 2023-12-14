@@ -101,9 +101,7 @@ int main()
 	//вектор вещественных - vDouble3, который является копией элементов
 	// [0,5) массива вещественных чисел dMas. Предварительно массив dMas 
 	//нужно создать и проинициализировать!
-//#define DEBUG
-	
-//#ifndef DEBUG
+
 	{
 		double dMas[] = { 1.5,2.5,3.5,4.5,5.5,6.5 };
 		int size = sizeof(dMas) / sizeof(dMas[0]);
@@ -115,10 +113,6 @@ int main()
 		}
 		std::cout << sep << std::endl;
 	}
-//#endif // !DEBUG
-
-	
-//#ifdef DEBUG
 	
 		double dMas[] = { 1.5,2.5,3.5,4.5,5.5,6.5 };
 		vector<double> vDouble3 = { &dMas[0], &dMas[5] };
@@ -128,8 +122,6 @@ int main()
 		}
 		std::cout << std::endl;
 		std::cout << sep << std::endl;
-	
-//#endif //DEBUG
 
 	
 	//вектор вещественных - vDouble4, который является копией элементов
