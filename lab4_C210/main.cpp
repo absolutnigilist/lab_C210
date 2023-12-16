@@ -209,43 +209,57 @@ int _tmain(int argc, _TCHAR* argv[])
 	//'A' -  "Abba" "Alfa"
 	//'B' -  "Beauty" "Beta"  ...
 	//...
-	const char* words[] = { "Abba", "Alfa", "Beta", "Beauty"};
-	std::map<char,std::vector<std::string>> mapWords;
-	for (size_t i = 0; i < sizeof(words)/sizeof(words[0]); i++)
 	{
-		std::string str(words[i]);
-		if (mapWords.find(str[0])==mapWords.end())
+	const char* words[] = { "Abba", "Alfa", "Beta", "Beauty"};				//массив строк
+	std::map<char,std::vector<std::string>> mapWords1;						//ассоциативный контейнер с ключом char и базовым контейнером vector<string>
+	for (size_t i = 0; i < sizeof(words)/sizeof(words[0]); i++)				//в цикле пробегаем по массиву
+	{
+		std::string str(words[i]);											//создаем строку и передаем i-й элемент массива
+		if (mapWords1.find(str[0])==mapWords1.end())						//если такого ключа не нашли
 		{
-			mapWords[str[0]] = std::vector<std::string>{ str };
+			mapWords1[str[0]] = std::vector<std::string>{ str };			//инстанцируем объект
 		}
-		else
+		else																//если ключ есть проверяем на дубли в векторе
 		{
-			bool isDuplicate = false;
-			std::vector<std::string>& tmp = mapWords[str[0]];
-			std::vector<std::string>::iterator itStr = tmp.begin();
-			for (; itStr != tmp.end(); ++itStr)
+			bool isDuplicate = false;										//флаг на дубли
+			std::vector<std::string>& tmp = mapWords1[str[0]];				//указатель на вектор по ключу
+			std::vector<std::string>::iterator itStr = tmp.begin();			//итератор
+			for (; itStr != tmp.end(); ++itStr)								//в цикле перебираем значения вектора
 			{
-				if (*itStr==str)
+				if (*itStr==str)											//если дубль найден
 				{
-					isDuplicate = true;
-					break;
+					isDuplicate = true;										//поднимаем флаг
+					break;													//выходим из цикла
 				}
-				else if (*itStr>str)
+				else if (*itStr>str)										//если дубля нет и значение меньше
 				{
-					tmp.insert(itStr, str);
-					isDuplicate = true;
-					break;
+					tmp.insert(itStr, str);									//вставляем значение
+					isDuplicate = true;										//поднимаем флаг
+					break;													//выходим из цикла
 				}
 			}
-			if (!isDuplicate)
+			if (!isDuplicate)												//если флаг не поднят, дублей нет и значение было больше искомых
 			{
-				tmp.push_back(str);
+				tmp.push_back(str);											//вставляем значение в конец
 			}
 		}
 		
 	}
-	PrintAdapterContainer(mapWords);
+	PrintAdapterContainer(mapWords1);
 	sep
+	}
+	{
+		const char* words[] = { "Abba", "Alfa", "Beta", "Beauty" };
+		std::map<char, std::set<std::string>> mapWords2;
+		for (size_t i = 0; i < sizeof(words)/sizeof(words[0]); i++)
+		{
+			std::string str(words[i]);
+			mapWords2[str[0]].insert(words[i]);
+		}
+		PrintAdapterContainer(mapWords2);
+		sep
+	}
+
 
 	//ж)
 	//создайте структуру данных, которая будет хранить информацию о студенческих группах.

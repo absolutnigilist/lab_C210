@@ -57,6 +57,31 @@ void PrintAdapterContainer(std::map<T, U>& a) {
 		}
 	}
 }
+template<>																	//перегруженный шаблон для вывода ассоциативного контейнера в консоль
+void PrintAdapterContainer(std::map<char, std::set<std::string>>& a) {
+	std::cout << "Container type: " << typeid(a).name() << std::endl;
+	if (a.empty())
+	{
+		std::cout << "Container is empty" << std::endl;
+	}
+	else
+	{
+		typename std::map<char, std::set<std::string>>::iterator itMap = a.begin();
+		while (itMap != a.end())
+		{
+			std::cout << "First_val: " << itMap->first << ", " << " Second_val: ";
+			std::set<std::string>& tmp_set = itMap->second;
+			std::set<std::string>::iterator it_tmp_set = tmp_set.begin();
+			while (it_tmp_set != tmp_set.end())
+			{
+				std::cout << *it_tmp_set << " ";
+				++it_tmp_set;
+			}
+			std::cout << std::endl;
+			++itMap;
+		}
+	}
+}
 
 template<>																	//перегруженный шаблон для вывода ассоциативного контейнера в консоль
 void PrintAdapterContainer(std::map<size_t, std::multiset<std::string>>& a) {
