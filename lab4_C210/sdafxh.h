@@ -3,6 +3,7 @@
 #include <stack>
 #include <queue>
 #include <map>
+#include <set>
 
 
 template<typename T>
@@ -53,6 +54,32 @@ void PrintAdapterContainer(std::map<T, U>& a) {
 		{
 			std::cout << "First_val: " << it->first << ", " << " Second_val: " << it->second << std::endl;
 			++it;
+		}
+	}
+}
+
+template<>																	//перегруженный шаблон для вывода ассоциативного контейнера в консоль
+void PrintAdapterContainer(std::map<size_t, std::multiset<std::string>>& a) {
+	std::cout << "Container type: " << typeid(a).name() << std::endl;
+	if (a.empty())
+	{
+		std::cout << "Container is empty" << std::endl;
+	}
+	else
+	{
+		typename std::map<size_t, std::multiset<std::string>>::iterator itMap = a.begin();
+		while (itMap != a.end())
+		{
+			std::cout << "First_val: " << itMap->first << ", " << " Second_val: ";
+			std::multiset<std::string>& tmp_multiset = itMap->second;
+			std::multiset<std::string>::iterator it_tmp_multiset = tmp_multiset.begin();
+			while (it_tmp_multiset != tmp_multiset.end())
+			{
+				std::cout << *it_tmp_multiset << " ";
+				++it_tmp_multiset;
+			}
+			std::cout << std::endl;
+			++itMap;
 		}
 	}
 }

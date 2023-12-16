@@ -254,8 +254,24 @@ int _tmain(int argc, _TCHAR* argv[])
 	//Сами группы тоже должны быть упорядочены по номеру
 	//
 	//номера 
+		struct MyStruct	{
+		
+		std::map<size_t, std::multiset<std::string>> groups;
 
+		void addStudent(int groupNumber, const std::string& studentName) {
+			groups[groupNumber].insert(studentName);
+		}
+	};
 
+	MyStruct myData;
+	myData.addStudent(1, "Ivanov");
+	myData.addStudent(1, "Petrov");
+	myData.addStudent(1, "Ivanov");
+	myData.addStudent(2, "Sidorov");
+	myData.addStudent(2, "Nazarov");
+
+	PrintAdapterContainer(myData.groups);
+	sep
 
 	////////////////////////////////////////////////////////////////////////////////////
 	//multimap
