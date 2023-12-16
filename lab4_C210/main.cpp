@@ -15,6 +15,9 @@
 #include <clocale>
 #include <iostream>
 #include <tchar.h>
+#include <unordered_map>
+#include <locale.h>
+
 
 const char* sep = "------------------------------------\n";
 #define sep std::cout << std::endl; std::cout<<sep; std::cout << std::endl;
@@ -22,6 +25,7 @@ const char* sep = "------------------------------------\n";
 
 int _tmain(int argc, _TCHAR* argv[])
 {
+	setlocale(LC_ALL, "Russian");
 	{
 		std::stack<int> myStack;					//создаем пустой объект стэк
 		myStack.push(1);							//задаем значения
@@ -277,7 +281,7 @@ int _tmain(int argc, _TCHAR* argv[])
 		}
 	};
 
-	MyStruct myData;
+	MyStruct myData; 
 	myData.addStudent(1, "Ivanov");
 	myData.addStudent(1, "Petrov");
 	myData.addStudent(1, "Ivanov");
@@ -290,13 +294,41 @@ int _tmain(int argc, _TCHAR* argv[])
 	////////////////////////////////////////////////////////////////////////////////////
 	//multimap
 	//а) создайте "англо-русский" словарь, где одному и тому же ключу будут соответствовать
-	//		несколько русских значений - pair<string,string>, например: strange: чужой, странный...
+	//	несколько русских значений - pair<string,string>, например: strange: чужой, странный...
 	//б) Заполните словарь парами с помощью метода insert или проинициализируйте с помощью 
-	//		вспомогательного массива пара (пары можно конструировать или создавать с помощью шаблона make_pair)
+	//	вспомогательного массива пара (пары можно конструировать или создавать с помощью шаблона make_pair)
 	//в) Выведите все содержимое словаря на экран
 	//г) Выведите на экран только варианты "переводов" для заданного ключа. Подсказка: для нахождения диапазона
 	//		итераторов можно использовать методы lower_bound() и upper_bound()
 
+	std::multimap<std::string,std::pair<std::string, std::string>> dictionary1;
+	dictionary1.insert(std::make_pair("strange", std::make_pair("странный", "чужой")));
+	dictionary1.insert(std::make_pair("power", std::make_pair("власть", "мощность")));
+	dictionary1.insert(std::make_pair("house", std::make_pair("дом", "жилище")));
+	
+	/*
+	dictionary.emplace("strange",std::make_pair("странный", "чужой"));
+	dictionary.emplace("power",std::make_pair("власть", "мощность"));
+	dictionary.emplace("house", std::make_pair("дом","жилище"));
+	*/
+	std::multimap<std::string, std::pair<std::string, std::string>> dictionary2;
+	std::string str_key[] = { "strange","power","house" };
+	std::pair<std::string, std::string> words[] = {
+		std::make_pair("странный", "чужой"),
+		std::make_pair("власть", "мощность"),
+		std::make_pair("дом","жилище")
+	};
+	
+	for (size_t i = 0; i < sizeof(words) / sizeof(words[0]); i++)
+	{
+		//dictionary2.emplace(str_key[i],words[i]);
+		dictionary2.insert(std::make_pair(str_key[i], words[i]));
+	}
+	PrintAdapterContainer(dictionary2);
+	sep
+	WordSearch(dictionary2, "strange");
+	sep
+	
 
 
 

@@ -42,7 +42,7 @@ void printAdapterContainer(std::queue<T> a) {
 
 template<typename T, typename U>										//перегруженный шаблон для вывода ассоциативного контейнера в консоль
 void PrintAdapterContainer(std::map<T, U>& a) {
-	std::cout << "Container type: " << typeid(a).name() << std::endl;
+	//std::cout << "Container type: " << typeid(a).name() << std::endl;
 	if (a.empty())
 	{
 		std::cout << "Container is empty" << std::endl;
@@ -59,7 +59,7 @@ void PrintAdapterContainer(std::map<T, U>& a) {
 }
 template<>																	//перегруженный шаблон для вывода ассоциативного контейнера в консоль
 void PrintAdapterContainer(std::map<char, std::set<std::string>>& a) {
-	std::cout << "Container type: " << typeid(a).name() << std::endl;
+	//std::cout << "Container type: " << typeid(a).name() << std::endl;
 	if (a.empty())
 	{
 		std::cout << "Container is empty" << std::endl;
@@ -85,7 +85,7 @@ void PrintAdapterContainer(std::map<char, std::set<std::string>>& a) {
 
 template<>																	//перегруженный шаблон для вывода ассоциативного контейнера в консоль
 void PrintAdapterContainer(std::map<size_t, std::multiset<std::string>>& a) {
-	std::cout << "Container type: " << typeid(a).name() << std::endl;
+	//std::cout << "Container type: " << typeid(a).name() << std::endl;
 	if (a.empty())
 	{
 		std::cout << "Container is empty" << std::endl;
@@ -111,7 +111,7 @@ void PrintAdapterContainer(std::map<size_t, std::multiset<std::string>>& a) {
 
 template<>																	//перегруженный шаблон для вывода ассоциативного контейнера в консоль
 void PrintAdapterContainer(std::map<char, std::vector<std::string>>& a) {
-	std::cout << "Container type: " << typeid(a).name() << std::endl;
+	//std::cout << "Container type: " << typeid(a).name() << std::endl;
 	if (a.empty())
 	{
 		std::cout << "Container is empty" << std::endl;
@@ -134,6 +134,23 @@ void PrintAdapterContainer(std::map<char, std::vector<std::string>>& a) {
 		}
 	}
 }
+template<typename T, typename U>
+void PrintAdapterContainer(std::multimap<T, std::pair<U, U>>& a) {
+	//std::cout << "Container type: " << typeid(a).name() << std::endl;
+	if (a.empty())
+	{
+		std::cout << "Container is empty" << std::endl;
+	}
+	else
+	{
+		typename std::multimap<T, std::pair<U, U>>::iterator itMap = a.begin();
+		while (itMap != a.end())
+		{
+			std::cout << "First_val: " << itMap->first << ", " << " Second_val: " << itMap->second.first << ", " << itMap->second.second << std::endl;
+			++itMap;
+		}
+	}
+}
 
 template<typename T>														//шаблон вывода контейнера на консоль
 void PrintContainer(const T& a) {
@@ -151,4 +168,27 @@ void PrintContainer(const T& a) {
 			++it;
 		}
 	}
+}
+
+
+void WordSearch(std::multimap<std::string, std::pair<std::string, std::string>>& map, const std::string& str) {
+	std::multimap < std::string, std::pair < std::string, std::string>>::iterator iter = map.begin();
+	bool flag = false;
+	while (iter!=map.end())
+	{
+		
+		if (iter->first==str)
+		{
+			std::cout << "word: " << iter->first << ", " << "translation: " << iter->second.first << "," << iter->second.second << std::endl;
+			flag = true;
+			break;
+		}
+		++iter;
+	}
+	if (!flag)
+	{
+		std::cout << "Word not found" << std::endl;
+	}
+
+
 }
