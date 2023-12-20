@@ -36,7 +36,7 @@ int _tmain(int argc, _TCHAR* argv[])
 		printAdapterContainer(myStack);				//на консоль 3 2 1
 		sep
 
-			std::queue<int> myQueue;					//создаем пустой объект очередь
+		std::queue<int> myQueue;					//создаем пустой объект очередь
 		myQueue.push(1);							//задаем значения
 		myQueue.push(2);
 		myQueue.push(3);
@@ -45,7 +45,7 @@ int _tmain(int argc, _TCHAR* argv[])
 		printAdapterContainer(myQueue);				//на консоль 1 2 3
 		sep
 
-			std::priority_queue<int> myPriorityQueue;
+		std::priority_queue<int> myPriorityQueue;
 		myPriorityQueue.push(3);
 		myPriorityQueue.push(2);
 		myPriorityQueue.push(1);
@@ -82,7 +82,7 @@ int _tmain(int argc, _TCHAR* argv[])
 		//Измените значения первого и последнего элементов посредством front() и back()
 		//Подумайте, что требуется сделать при уничтожении такой очереди?
 
-		std::deque<Point*> vpPoint(5);										//создаем deque эказателей на Point размером пять элементов
+		std::deque<Point*> vpPoint(5);									//создаем deque эказателей на Point размером пять элементов
 	for (size_t i = 0; i < vpPoint.size(); i++)
 	{
 		vpPoint[i] = new Point(i, i);									//динамически создаем объекты
@@ -96,7 +96,7 @@ int _tmain(int argc, _TCHAR* argv[])
 	vQueue.back()->Set_coord(20, 20);									//модифицируем значение последнего объекта
 
 	printAdapterContainer(vQueue);										//на консоль 
-	sep																	//m_x:10 m_y 20
+	sep																	//m_x:10 m_y 10
 																		//m_x...	
 																		//m_x: 20 m_y: 20 
 
@@ -123,7 +123,9 @@ int _tmain(int argc, _TCHAR* argv[])
 	printAdapterContainer(vPrQueue2);									//на консоль A B C D E
 	sep																	//формирование очереди с помощью пользовательского компаратора
 
-
+	std::priority_queue<const char*, std::vector<const char*>, std::greater<const char*>> vPrQueue3(ar, ar + sizeof(ar) / sizeof(ar[0]));
+	printAdapterContainer(vPrQueue3);
+	sep
 	////////////////////////////////////////////////////////////////////////////////////
 	//set
 	//a) создайте множество с элементами типа Point - подумайте, что необходимо определить
@@ -329,13 +331,6 @@ int _tmain(int argc, _TCHAR* argv[])
 	WordSearch(dictionary2, "strange");
 	sep
 	
-
-
-
-
-
-			stop
-
-			return 0;
+	return 0;
 	}
 

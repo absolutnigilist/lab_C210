@@ -11,6 +11,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "lab3_C210", "lab3_C210\lab3
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "lab4_C210", "lab4_C210\lab4_C210.vcxproj", "{17F2B587-5601-48CE-A2D2-1B8733156CB7}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "lab5_C210", "lab5_C210\lab5_C210.vcxproj", "{EBBD6378-A283-4F28-A9A8-33FB0FDAF06C}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -51,6 +53,14 @@ Global
 		{17F2B587-5601-48CE-A2D2-1B8733156CB7}.Release|x64.Build.0 = Release|x64
 		{17F2B587-5601-48CE-A2D2-1B8733156CB7}.Release|x86.ActiveCfg = Release|Win32
 		{17F2B587-5601-48CE-A2D2-1B8733156CB7}.Release|x86.Build.0 = Release|Win32
+		{EBBD6378-A283-4F28-A9A8-33FB0FDAF06C}.Debug|x64.ActiveCfg = Debug|x64
+		{EBBD6378-A283-4F28-A9A8-33FB0FDAF06C}.Debug|x64.Build.0 = Debug|x64
+		{EBBD6378-A283-4F28-A9A8-33FB0FDAF06C}.Debug|x86.ActiveCfg = Debug|Win32
+		{EBBD6378-A283-4F28-A9A8-33FB0FDAF06C}.Debug|x86.Build.0 = Debug|Win32
+		{EBBD6378-A283-4F28-A9A8-33FB0FDAF06C}.Release|x64.ActiveCfg = Release|x64
+		{EBBD6378-A283-4F28-A9A8-33FB0FDAF06C}.Release|x64.Build.0 = Release|x64
+		{EBBD6378-A283-4F28-A9A8-33FB0FDAF06C}.Release|x86.ActiveCfg = Release|Win32
+		{EBBD6378-A283-4F28-A9A8-33FB0FDAF06C}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
