@@ -145,18 +145,22 @@ int _tmain(int argc, _TCHAR* argv[])
 	//С помощью алгоритма find_if() найдите в любой последовательности элементов Point
 	//итератор на элемент Point, удовлетворяющий условию: координаты x и y лежат в промежутке
 	//[-n, +m].
-	/* {
-		std::list<Point> list;																		//контейнер для хранения совпадающих элементов
-		std::vector<Point> vecPoint{ {1, 2}, { 2,3 }, { 1,2 },{3,4} };
-		std::vector<Point>::iterator it = std::find_if(vecPoint.begin(), vecPoint.end(), SurсheElements(2,3));	//с помощью find() находим итератор с совпадающим элементом
-		while (it != vecPoint.end())																//пробегаем до конца вектора если find() вернул не 0
+	 {
+		std::list<Point> list;													//контейнер для хранения подходящих элементов
+		std::vector<Point> vecPoint{ {1, 2}, { 2,3 }, { 1,2 },{3,4} };			//искомый вектор
+		std::vector<Point>::iterator it = vecPoint.begin();						//итератор на начало вектора
+		while (it!=vecPoint.end())												//пробегаем по вектору
 		{
-			list.push_back(*it);																	//добавляем элемент в лист
-			it = std::find(++it, vecPoint.end(), Point(1, 2));										//смещаем итератор и ищем совпадения
+			it = std::find_if(it, vecPoint.end(), SurcheElements<int>(1, 3));	//find_if() возвращает итератор на подходящий элемент||на конец списка
+			if (it!=vecPoint.end())												//если итератор не указывает на конец
+			{
+				list.push_back(*it);											//добавляем в лист совпадающий элемент
+				++it;															//сдвигаем итератор
+			}
 		}
 		stop
 	
-	}*/
+	}
 
 
 	//С помощью алгоритма sort() отсортируйте любую последовательность элементов Rect,
