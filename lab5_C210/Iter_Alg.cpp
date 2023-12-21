@@ -11,11 +11,15 @@
 #include <tchar.h>
 #include "Point.h"
 #include "sdafxh.h"
+#include "Functors.h"
 
-//using namespace std;	
-#define	  stop __asm nop
+
+
 const char* sep = "------------------------------------\n";
 #define sep std::cout << std::endl; std::cout<<sep; std::cout << std::endl;
+
+
+#define	  stop __asm nop
 
 int _tmain(int argc, _TCHAR* argv[])
 {
@@ -50,12 +54,12 @@ int _tmain(int argc, _TCHAR* argv[])
 	sep
 
 
-		//Итераторы вставки. С помощью возвращаемых функциями:
-		//back_inserter()
-		//front_inserter()
-		//inserter()
-		//итераторов вставки добавьте элементы в любой из созданных контейнеров. Подумайте:
-		//какие из итераторов вставки можно использовать с каждым контейнером.
+	//Итераторы вставки. С помощью возвращаемых функциями:
+	//back_inserter()
+	//front_inserter()
+	//inserter()
+	//итераторов вставки добавьте элементы в любой из созданных контейнеров. Подумайте:
+	//какие из итераторов вставки можно использовать с каждым контейнером.
 
 	//back_inserter(),front_inserter не используется для множества
 
@@ -75,7 +79,8 @@ int _tmain(int argc, _TCHAR* argv[])
 	*it_insert_vec = Point(40, 40);
 	PrintContainer(setPoint);
 	sep
-///////////////////////////////////////////////////////////////////
+
+		///////////////////////////////////////////////////////////////////
 
 	//Задание 2. Обобщенные алгоритмы (заголовочный файл <algorithm>). Предикаты.
 
@@ -85,22 +90,42 @@ int _tmain(int argc, _TCHAR* argv[])
 	//распечатайте значения элементов
 	//Подсказка : неплохо вызываемую функцию определить как шаблон
 
+	int ar[] = { 1,2,3,4,5 };
+	std::vector<int> int_vector(ar, ar+sizeof(ar) / sizeof(ar[0]));
+	std::list<int> int_list(ar, ar + sizeof(ar) / sizeof(ar[0]));
 
-
-	stop
-
+	
+	std::for_each(ar, ar+sizeof(ar)/sizeof(ar[0]),print<int>);
+	sep
+	std::for_each(int_vector.begin(), int_vector.end(), print<int>);
+	sep
+	std::for_each(int_list.begin(), int_list.end(), print<int>);
+	sep
+	{
 	//С помощью алгоритма for_each в любой последовательности с элементами типа Point
 	//измените "координаты" на указанное значение (такой предикат тоже стоит реализовать 
 	//как шаблон) и выведите результат с помощью предыдущего предиката
+	std::vector<Point> vecPoint{ {1, 2}, { 2,3 }, { 3,4 }};
 
-
-
+	std::for_each(vecPoint.begin(), vecPoint.end(), ChangeElements<int>(10,10));
+	std::for_each(vecPoint.begin(), vecPoint.end(), print<Point>);
+ 	sep
+	}
 
 	//С помощью алгоритма find() найдите в любой последовательности элементов Point
 	//все итераторы на элемент Point с указанным значением.
+	{
+		std::list<Point> list;																		//контейнер для хранения совпадающих элементов
+		std::vector<Point> vecPoint{ {1, 2}, { 2,3 }, { 1,2 },{3,4} };								//искомый вектор типа Point
+		std::vector<Point>::iterator it = std::find(vecPoint.begin(), vecPoint.end(), Point(1, 2));	//с помощью find() находим итератор с совпадающим элементом
+		while (it != vecPoint.end())																//пробегаем до конца вектора если find() вернул не 0
+		{	
+			list.push_back(*it);																	//добавляем элемент в лист
+			it = std::find(++it, vecPoint.end(), Point(1, 2));										//смещаем итератор и ищем совпадения
+		}
+		stop
 
-
-
+	}
 	
 	
 	//С помощью алгоритма sort() отсортируйте любую последовательность элементов Point. 
@@ -108,15 +133,30 @@ int _tmain(int argc, _TCHAR* argv[])
 	//Что должно быть определено в классе Point?
 	// Замечание: обобщенный алгоритм sort не работает со списком, так как
 	//это было бы не эффективно => для списка сортировка реализована методом класса!!!
-	
+	{
+		Point ar[] = { {1, 2}, { 2,3 }, { 1,2 },{3,4} };											//массив элементов типа Point									
+		std::vector<Point> vecPoint{ {1, 2}, { 2,3 }, { 1,2 },{3,4} };								//контейнер для хранения совпадающих элементов
+		
+		std::sort(ar, ar + sizeof(ar) / sizeof(ar[0]));
+		std::sort(vecPoint.begin(), vecPoint.end());
+		stop
+	}
 
-
-
-	
 	//С помощью алгоритма find_if() найдите в любой последовательности элементов Point
 	//итератор на элемент Point, удовлетворяющий условию: координаты x и y лежат в промежутке
 	//[-n, +m].
-
+	/* {
+		std::list<Point> list;																		//контейнер для хранения совпадающих элементов
+		std::vector<Point> vecPoint{ {1, 2}, { 2,3 }, { 1,2 },{3,4} };
+		std::vector<Point>::iterator it = std::find_if(vecPoint.begin(), vecPoint.end(), SurсheElements(2,3));	//с помощью find() находим итератор с совпадающим элементом
+		while (it != vecPoint.end())																//пробегаем до конца вектора если find() вернул не 0
+		{
+			list.push_back(*it);																	//добавляем элемент в лист
+			it = std::find(++it, vecPoint.end(), Point(1, 2));										//смещаем итератор и ищем совпадения
+		}
+		stop
+	
+	}*/
 
 
 	//С помощью алгоритма sort() отсортируйте любую последовательность элементов Rect,

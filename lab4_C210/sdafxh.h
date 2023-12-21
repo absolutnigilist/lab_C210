@@ -25,8 +25,8 @@ void printAdapterContainer(T a) {
 	}
 
 }
-template<typename T>														//перегруженный шаблон для вывода очереди и приоритентной очереди на консоль
-void printAdapterContainer(std::queue<T> a) {
+template<typename T, typename C>														//перегруженный шаблон для вывода очереди и приоритентной очереди на консоль
+void printAdapterContainer(std::queue<T,C> a) {
 	std::cout << "Container type: " << typeid(a).name() << std::endl;
 	if (a.empty())
 	{

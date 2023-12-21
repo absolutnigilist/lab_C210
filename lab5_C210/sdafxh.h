@@ -192,3 +192,8 @@ void WordSearch(std::multimap<std::string, std::pair<std::string, std::string>>&
 
 
 }
+template <typename T>
+void print(const T& item) {
+	std::cout << item << " ";
+}
+

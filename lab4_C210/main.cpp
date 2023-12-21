@@ -36,7 +36,7 @@ int _tmain(int argc, _TCHAR* argv[])
 		printAdapterContainer(myStack);				//на консоль 3 2 1
 		sep
 
-		std::queue<int> myQueue;					//создаем пустой объект очередь
+		std::queue<int, std::list<int>> myQueue;					//создаем пустой объект очередь
 		myQueue.push(1);							//задаем значения
 		myQueue.push(2);
 		myQueue.push(3);
@@ -186,7 +186,11 @@ int _tmain(int argc, _TCHAR* argv[])
 	employees["Petrova"] = 60000;
 	employees.insert(std::pair<const char*, int>("Sidorova", 70000));
 	employees.insert(std::pair<const char*, int>("Makhankova", 80000));
-
+	
+	PrintAdapterContainer(employees);
+	sep
+	employees.insert(std::make_pair("Nevorova", employees.at("Ivanova")));
+	employees.erase("Ivanova");
 	PrintAdapterContainer(employees);
 	sep
 
@@ -330,6 +334,14 @@ int _tmain(int argc, _TCHAR* argv[])
 	sep
 	WordSearch(dictionary2, "strange");
 	sep
+	
+	std::string key = "strange";
+	std::multimap<std::string, std::pair<std::string, std::string>>::iterator lower = dictionary2.lower_bound(key);
+	std::multimap<std::string, std::pair<std::string, std::string>>::iterator upper = dictionary2.upper_bound(key);
+	for (std::multimap<std::string, std::pair<std::string, std::string>>::iterator itr = lower; itr != upper; ++itr) 
+	{
+		std::cout << "word: " << itr->first << ", " << "translation: " << itr->second.first << "," << itr->second.second << std::endl;
+	}
 	
 	return 0;
 	}
