@@ -207,7 +207,7 @@ int _tmain(int argc, _TCHAR* argv[])
 		//вывести сначала строки, начинающиеся с буквы "А" или "а", затем с "Б"...
 		//При этом порядок строк в исходном векторе менять не нужно!
 	{
-	std::vector<std::string> vector={"Apple","Center","Book","god","apricot"};
+	std::vector<std::string> vector{"Apple","Center","Book","god","apricot"};
 	for(char c = 'A';  c<= 'Z'; c++)
 	{
 		std::vector<std::string>::iterator it = std::find_if(vector.begin(), vector.end(), FirstLetter(c));
@@ -216,33 +216,38 @@ int _tmain(int argc, _TCHAR* argv[])
 			std::copy_if(vector.begin(), vector.end(), std::ostream_iterator<std::string>(std::cout, " "), FirstLetter(c));
 		}
 	}
-	stop
+	sep
 	}
-
-
-		
-
+	{
 		//Дан multimap, содержаций пары: "месяц - количество денй в месяце"
 		//pair<string, int>. С помощью copy_if сформируйте ДВА map-а: первый -
 		//с парами, содержащими четное количество дней, 2-ой - нечетное.
-		//std::multimap<string, int> month {
-			//{"January", 31}, {"February", 28}, {"February", 29}, { "March", 31},
-			//{"April", 30}, {"May",31}, {"June", 30}, {"July", 31}, {"August",31},
-			//{"September",30}, {"October", 31}, {"November",30}, {"December",31}
-		//};
-
-
-
+		std::multimap<std::string, int> month{
+			{"January", 31}, {"February", 28}, {"February", 29}, { "March", 31},
+			{"April", 30}, {"May",31}, {"June", 30}, {"July", 31}, {"August",31},
+			{"September",30}, {"October", 31}, {"November",30}, {"December",31}
+		};
+		std::multimap<std::string, int> month_odd;
+		std::multimap<std::string, int> month_honest;
+		
+		std::copy_if(month.begin(), month.end(), std::inserter(month_odd, month_odd.end()), isOdd);
+		std::copy_if(month.begin(), month.end(), std::inserter(month_honest, month_honest.end()), isHonest);
+		
 		stop
+
 
 		//Распечатайте multimap и map-ы, используя написанный вами ранее шаблон
 		//функции, выводящей элементы ЛЮБОГО контейнера на печать.
 		//Что нужно сделать дополнительно для вывода пары?
 
 
-	
-		stop
-	//}
+		PrintAdapterContainer(month);
+		sep
+		PrintAdapterContainer(month_odd);
+		sep
+		PrintAdapterContainer(month_honest);
+		sep
+	}
 
 	return 0;
 }

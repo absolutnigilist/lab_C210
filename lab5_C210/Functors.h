@@ -37,3 +37,11 @@ struct FirstLetter
 	
 	return string[0]==letter||string[0]==letter+32; }
 };
+
+bool isOdd(std::pair<const std::string, int>& pair) {
+	return pair.second & 1;
+}
+
+bool isHonest(std::pair<const std::string, int>& pair) {
+	return !(pair.second & 1);
+}

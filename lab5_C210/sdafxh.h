@@ -152,6 +152,25 @@ void PrintAdapterContainer(std::multimap<T, std::pair<U, U>>& a) {
 	}
 }
 
+template<typename T, typename U>
+void PrintAdapterContainer(std::multimap<T,U>& a) {
+	//std::cout << "Container type: " << typeid(a).name() << std::endl;
+	if (a.empty())
+	{
+		std::cout << "Container is empty" << std::endl;
+	}
+	else
+	{
+		typename std::multimap<T,U>::iterator itMap = a.begin();
+		while (itMap != a.end())
+		{
+			std::cout << "First_val: " << itMap->first << ", " << " Second_val: " << itMap->second << std::endl;
+			++itMap;
+		}
+	}
+}
+
+
 template<typename T>														//шаблон вывода контейнера на консоль
 void PrintContainer(const T& a) {
 	std::cout << "Container type: " << typeid(a).name() << std::endl;
