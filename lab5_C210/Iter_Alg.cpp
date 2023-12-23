@@ -12,6 +12,7 @@
 #include "Point.h"
 #include "sdafxh.h"
 #include "Functors.h"
+#include "Rect.h"
 
 
 
@@ -162,40 +163,64 @@ int _tmain(int argc, _TCHAR* argv[])
 	
 	}
 
-
 	//С помощью алгоритма sort() отсортируйте любую последовательность элементов Rect,
 	//располагая прямоугольники по удалению центра от начала координат.
 	
+	std::vector<Rect> rects{  {5, 6, 7, 8}, {1, 2, 3, 4},{13, 14, 15, 16}, {9, 10, 11, 12}};
+	std::sort(rects.begin(), rects.end(), compareRec);
+	stop
 
-
-
-
-
-
-	//{//transform
-		//Напишите функцию, которая с помощью алгоритма transform переводит 
-		//содержимое объекта string в нижний регистр.
-		//Подсказка: класс string - это "почти" контейнер, поэтому для него
-		// определены методы begin() и end()
-
-
-		//Заполните list объектами string. С помощью алгоритма transform сформируте
-		//значения "пустого" set, конвертируя строки в нижний регистр
-	
-
-
-
+	//transform
+	//Напишите функцию, которая с помощью алгоритма transform переводит 
+	//содержимое объекта string в нижний регистр.
+	//Подсказка: класс string - это "почти" контейнер, поэтому для него
+	// определены методы begin() и end()
+	{
+	std::string str{ "AbC, dEf" };
+	toLowerCase(str);
+	stop
+	}
+	//Заполните list объектами string. С помощью алгоритма transform сформируте
+	//значения "пустого" set, конвертируя строки в нижний регистр
+	{
+		std::list <std::string> list{ "AbC","GhI","DeF"};
+		std::set<std::string> set;
+		std::transform(list.begin(), list.end(), std::inserter(set,set.begin()), toLowerCaseSet);
 		stop
-//	}
-	
-	//{//copy_if
+	}
+	{
+		std::list <std::string> list{ "AbC","GhI","DeF" };
+		std::set<std::string> set;
+		std::insert_iterator<std::set<std::string>> it(set, set.begin());
+		std::transform(list.begin(), list.end(), it, toLowerCaseSet);
+		stop
+	}
+
+
+
+
+	stop
+
+
+		//copy_if
 		//Дан вектор с элементами типа string. С помощью copy_if() требуется
 		//вывести сначала строки, начинающиеся с буквы "А" или "а", затем с "Б"...
 		//При этом порядок строк в исходном векторе менять не нужно!
+	{
+	std::vector<std::string> vector={"Apple","Center","Book","god","apricot"};
+	for(char c = 'A';  c<= 'Z'; c++)
+	{
+		std::vector<std::string>::iterator it = std::find_if(vector.begin(), vector.end(), FirstLetter(c));
+		if (it!=vector.end())
+		{
+			std::copy_if(vector.begin(), vector.end(), std::ostream_iterator<std::string>(std::cout, " "), FirstLetter(c));
+		}
+	}
+	stop
+	}
 
 
-
-		stop
+		
 
 		//Дан multimap, содержаций пары: "месяц - количество денй в месяце"
 		//pair<string, int>. С помощью copy_if сформируйте ДВА map-а: первый -

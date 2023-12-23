@@ -32,6 +32,4 @@ public:
 		return os;
 
 	};
-	template<typename T>
-	friend class SurcheElements;
 };

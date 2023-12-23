@@ -197,3 +197,13 @@ void print(const T& item) {
 	std::cout << item << " ";
 }
 
+char toLower(char c) {
+	return std::tolower(static_cast<unsigned char>(c));
+}
+void toLowerCase(std::string& string) {
+	std::transform(string.begin(), string.end(),string.begin(), toLower);
+}
+std::string toLowerCaseSet(std::string string) {
+	std::transform(string.begin(), string.end(), string.begin(), toLower);
+	return string;
+}
